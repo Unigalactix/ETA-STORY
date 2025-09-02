@@ -13,7 +13,7 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ sections, activeSection, isVisible }) => {
-    const { muted, toggleMute } = useSound();
+    const { muted, toggleMute, activateAudio, isActive } = useSound();
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}>
@@ -46,14 +46,24 @@ const Navigation: React.FC<NavigationProps> = ({ sections, activeSection, isVisi
                             ))}
                         </div>
 
-                        <button
-                            onClick={(e) => { e.preventDefault(); toggleMute(); }}
-                            aria-pressed={muted}
-                            className="ml-2 px-2 py-1 rounded-md text-slate-400 hover:text-white bg-transparent hover:bg-slate-800 text-xs font-mono"
-                            title={muted ? 'Unmute' : 'Mute'}
-                        >
-                            {muted ? '🔇' : '🔊'}
-                        </button>
+                        {!isActive ? (
+                            <button
+                                onClick={(e) => { e.preventDefault(); activateAudio(); }}
+                                className="ml-2 px-2 py-1 rounded-md text-slate-200 bg-teal-600/10 hover:bg-teal-600/20 text-xs font-mono"
+                                title="Enable sound"
+                            >
+                                Enable sound
+                            </button>
+                        ) : (
+                            <button
+                                onClick={(e) => { e.preventDefault(); toggleMute(); }}
+                                aria-pressed={muted}
+                                className="ml-2 px-2 py-1 rounded-md text-slate-400 hover:text-white bg-transparent hover:bg-slate-800 text-xs font-mono"
+                                title={muted ? 'Unmute' : 'Mute'}
+                            >
+                                {muted ? '🔇' : '🔊'}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
