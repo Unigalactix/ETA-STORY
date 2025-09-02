@@ -32,51 +32,42 @@ const CharacterDossier: React.FC<{ character: Character; onPlayGame: (name: stri
     <div 
       onClick={() => setIsExpanded(!isExpanded)}
       className={`
-        relative w-80 rounded-lg p-6 overflow-hidden transition-all duration-500 ease-in-out
+        relative w-full max-w-xs sm:w-80 rounded-lg p-6 transition-all duration-500 ease-in-out
         bg-slate-900/70 border ${border} ${shadow} backdrop-blur-sm
         flex flex-col items-center text-center cursor-pointer
-        ${isExpanded ? 'h-[38rem]' : 'h-80'}
       `}
     >
-      <div className={`transition-all duration-500 ${isExpanded ? 'translate-y-0' : 'translate-y-24'}`}>
+      <div className="flex flex-col items-center">
         <character.icon className={`w-10 h-10 mb-2 mx-auto ${text}`} />
         <h3 className={`text-2xl font-bold uppercase tracking-wider ${text}`}>
           {character.name} {character.emoji}
         </h3>
         <h4 className="text-sm font-semibold text-slate-300">{character.title}</h4>
       </div>
-      
-      <div className={`
-        absolute w-full px-12 space-y-3 transition-all duration-500
-        ${isExpanded ? 'top-40 opacity-100 translate-y-0 delay-200' : 'top-40 opacity-0 translate-y-16'}
-      `}>
-          <StatsBar label="Courage" value={character.stats.courage} colorClass={bg} />
-          <StatsBar label="Intellect" value={character.stats.intellect} colorClass={bg} />
-          <StatsBar label="Agility" value={character.stats.agility} colorClass={bg} />
-      </div>
 
-      <div className={`
-          absolute top-72 w-full px-8 transition-[opacity,transform] duration-500 ease-in-out 
-          ${isExpanded ? 'opacity-100 translate-y-0 delay-300' : 'opacity-0 translate-y-4'}
-      `}>
-          <p className="text-slate-300 text-sm h-40 overflow-y-auto leading-relaxed text-left font-mono border-t border-slate-700/50 pt-4">
-              {character.description}
-          </p>
-      </div>
+      <div className={`w-full mt-4 transition-[max-height,opacity,transform] duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0'} `}>
+          <div className="space-y-3 px-2">
+              <StatsBar label="Courage" value={character.stats.courage} colorClass={bg} />
+              <StatsBar label="Intellect" value={character.stats.intellect} colorClass={bg} />
+              <StatsBar label="Agility" value={character.stats.agility} colorClass={bg} />
 
-      {isExpanded && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-full px-8">
-             <button 
-                onClick={(e) => {
-                    e.stopPropagation();
-                    onPlayGame(character.name);
-                }}
-                className={`w-full py-3 text-sm font-bold uppercase tracking-widest rounded ${bg} text-slate-900 transition-all duration-300 hover:shadow-lg ${shadow} hover:scale-105`}
-             >
-                Play Minigame
-             </button>
-        </div>
-    )}
+              <p className="text-slate-300 text-sm max-h-40 overflow-y-auto leading-relaxed text-left font-mono border-t border-slate-700/50 pt-4 mt-2">
+                  {character.description}
+              </p>
+
+              <div className="mt-4">
+                 <button 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onPlayGame(character.name);
+                    }}
+                    className={`w-full py-3 text-sm font-bold uppercase tracking-widest rounded ${bg} text-slate-900 transition-all duration-300 hover:shadow-lg ${shadow} hover:scale-105`}
+                 >
+                    Play Minigame
+                 </button>
+              </div>
+          </div>
+      </div>
     </div>
   );
 };
