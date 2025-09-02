@@ -1,12 +1,11 @@
-
 import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
-        <p>Interactive Infographic created based on "ETO (Tinglish Edition)" by Bunny Kodaganti.</p>
-        <p className="mt-2 text-sm">&copy; 2024. All rights reserved.</p>
+    <footer className="bg-slate-950 border-t border-slate-800/50">
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-slate-500 font-mono">
+        <p>Terminal log based on "ETA (English Edition)" by Bunny Kodaganti.</p>
+        <p className="mt-2 text-xs opacity-70">&copy; 2024 // End of Transmission</p>
       </div>
     </footer>
   );
