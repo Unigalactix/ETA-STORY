@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 export interface Character {
   name: string;
   title: string;
